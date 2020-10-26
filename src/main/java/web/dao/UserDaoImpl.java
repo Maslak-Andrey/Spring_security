@@ -53,5 +53,6 @@ public class UserDaoImpl implements UserDao{
         TypedQuery<User> q = entityManager.createQuery("select u from User u where u.name = :name", User.class);
         q.setParameter("name", username);
         return q.getSingleResult();
+//        return (User) entityManager.createQuery("FROM User WHERE name =:name").setParameter("name", username).getSingleResult();
     }
 }
