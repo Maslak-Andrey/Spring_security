@@ -11,11 +11,13 @@
 <p th:text="${user.getName()}">VALUE</p>
 <p th:text="${user.getPassword()}">VALUE</p>
 
-<a th:href="@{/users/{id}/edit(id=${user.getId()})}">Edit</a>
 
-<form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
-    <input type="submit" value="Delete"/>
-</form>
+
+<td>
+    <form th:method="GET" th:action="@{/logout}">
+        <input type="submit" value="Logout"/>
+    </form>
+</td>
 
 </body>
 </html>

@@ -1,6 +1,7 @@
 package web.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -20,10 +21,10 @@ import web.service.UserDetailsServiceImpl;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private UserDetailsServiceImpl userDetailsService;
+    private UserDetailsService userDetailsService;
 
     @Autowired
-    public void setUserDetailsService(UserDetailsServiceImpl userDetailsService) {
+    public void setUserDetailsService(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 

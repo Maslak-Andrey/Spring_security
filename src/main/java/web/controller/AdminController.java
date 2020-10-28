@@ -5,15 +5,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
+import web.service.UserService;
 import web.service.UserServiceImpl;
 
 @Controller
 public class AdminController {
 
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Autowired
-    public void setUserService(UserServiceImpl userService) {
+    public void setUserService(UserService userService) {
         this.userService = userService;
     }
 
@@ -28,11 +29,11 @@ public class AdminController {
         return "index";
     }
 
-    @GetMapping("/{id}")
-    public String show(@PathVariable("id") long id, Model model) {
-        model.addAttribute("user", userService.readUserById(id));
-        return "show";
-    }
+//    @GetMapping("/{id}")
+//    public String show(@PathVariable("id") long id, Model model) {
+//        model.addAttribute("user", userService.readUserById(id));
+//        return "show";
+//    }
 
     @GetMapping("/admin/new")
     public String newUser(@ModelAttribute("user") User user) {
@@ -42,7 +43,7 @@ public class AdminController {
     @PostMapping("/admin")
     public String create(@ModelAttribute("user") User user) {
         userService.addUser(user);
-        return "redirect:/admin";
+        return "redirect:/index";
     }
 
     @GetMapping("admin/{id}/edit")

@@ -7,8 +7,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import web.model.User;
+import web.service.UserService;
 import web.service.UserServiceImpl;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +19,10 @@ import java.util.List;
 @RequestMapping("/")
 public class UserController {
 
-	private UserServiceImpl userService;
+	private UserService userService;
 
 	@Autowired
-	public void setUserService(UserServiceImpl userService) {
+	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
 
@@ -29,8 +32,14 @@ public class UserController {
     }
 
 	@GetMapping("user")
-	public String userPage() {
+	public String userLoginPage() {
 		return "user";
 	}
 
+	@GetMapping("show")
+	public String userPage(Model model, Principal principal) {
+		User currentUser = userService.getUserByUserName(principal.getName());
+		model.addAttribute("user", currentUser);
+        return "show";
+	}
 }

@@ -24,7 +24,12 @@
 
 <br>
 
-<a href="/index">Back to list</a>
+<td>
+    <form th:method="GET" th:action="@{/index}">
+        <input type="submit" value="Back to list"/>
+    </form>
+</td>
+
 
 </body>
 </html>

@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<h1>Admin's panel</h1>
+<h1>User's list</h1>
 
 <table border="1">
     <tr>
@@ -51,6 +51,12 @@
 </h3>
 <br>
 <br>
-<a th:href="/admin"> Link to admin </a>
+
+<td>
+    <form th:method="GET" th:action="@{/admin}">
+        <input type="submit" value="Link to admin panel"/>
+    </form>
+</td>
+
 </body>
 </html>

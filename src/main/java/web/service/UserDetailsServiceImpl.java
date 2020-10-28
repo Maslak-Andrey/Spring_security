@@ -28,6 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     //  приведен к классу UserDetails.
     // Для создания UserDetails используется интерфейс UserDetailsService, с единственным методом:
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 //        User myUser = userDao.getUserByUserName(username);
 //
