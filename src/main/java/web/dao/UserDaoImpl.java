@@ -6,11 +6,12 @@ import web.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-@Component
-public class UserDaoImpl implements UserDao{
+@Repository
+public class UserDaoImpl implements UserDao {
 
     @PersistenceContext(unitName = "entityManagerFactory")
     private EntityManager entityManager;
@@ -34,7 +35,7 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public List<User> getAllUsers() {
-        return entityManager.createQuery("from User", User.class).getResultList();
+        return entityManager.createQuery("select u from User u").getResultList();
     }
 
     @Override
@@ -44,16 +45,21 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public User readUserById(Long id) {
-        TypedQuery<User> q = entityManager.createQuery("select u from User u where u.id = :id", User.class);
-        q.setParameter("id", id);
-        return q.getSingleResult();
+//        TypedQuery<User> q = entityManager.createQuery("select u from User u where u.id = :id", User.class);
+//        q.setParameter("id", id);
+//        return q.getSingleResult();
+        return entityManager.find(User.class, id);
     }
 
     @Override
-    public User getUserByUserName(String username) {
-        TypedQuery<User> q = entityManager.createQuery("select u from User u where u.name = :name", User.class);
-        q.setParameter("name", username);
-        return q.getSingleResult();
-//        return (User) entityManager.createQuery("FROM User WHERE name =:name").setParameter("name", username).getSingleResult();
+    public User getUserByUsername(String username) {
+        try {
+            Query query = (Query) entityManager.createQuery("select u from User u where u.name = :name ");
+            query.setParameter("name", username);
+            return (User) query.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

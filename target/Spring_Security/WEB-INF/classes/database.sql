@@ -1,7 +1,7 @@
 -- Table: users
 CREATE TABLE users (
                        id       INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                       username VARCHAR(255) NOT NULL,
+                       username VARCHAR(255) NOT NULL UNIQUE,
                        password VARCHAR(255) NOT NULL
 );
 
@@ -11,8 +11,8 @@ CREATE TABLE roles (
                        name VARCHAR(100) NOT NULL
 );
 
--- Table for mapping user and roles: user_roles
-CREATE TABLE user_roles (
+-- Table for mapping user and roles: users_roles
+CREATE TABLE users_roles (
                             user_id INT NOT NULL,
                             role_id INT NOT NULL,
 
@@ -30,6 +30,6 @@ INSERT INTO users VALUES (2, 'USER', '100');
 INSERT INTO roles VALUES (1, 'ROLE_USER');
 INSERT INTO roles VALUES (2, 'ROLE_ADMIN');
 
-INSERT INTO user_roles VALUES (1, 2);
-INSERT INTO user_roles VALUES (1, 1);
-INSERT INTO user_roles VALUES (2, 1);
+INSERT INTO users_roles VALUES (1, 2);
+INSERT INTO users_roles VALUES (1, 1);
+INSERT INTO users_roles VALUES (2, 1);

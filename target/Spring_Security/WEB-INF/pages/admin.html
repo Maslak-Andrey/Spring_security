@@ -6,23 +6,22 @@
 </head>
 <body>
 <h1>Admin's panel</h1>
-<br>
-<br>
-<br>
-<br>
 <td>
     <form th:method="GET" th:action="@{/index}">
         <input type="submit" value="Link to User's list"/>
     </form>
 </td>
 <br>
+<td>
+    <form th:method="GET" th:action="@{/show}">
+        <input type="submit" value="Information about Admin"/>
+    </form>
+</td>
 <br>
 <td>
     <form th:method="GET" th:action="@{/logout}">
         <input type="submit" value="Logout"/>
     </form>
 </td>
-
-
 </body>
 </html>

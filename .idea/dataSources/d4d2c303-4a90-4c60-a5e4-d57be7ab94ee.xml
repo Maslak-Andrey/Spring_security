@@ -932,79 +932,78 @@ SELECT|sys.sys_config:null
 </ObjectGrants>
     </user>
     <table id="292" parent="11" name="roles"/>
-    <table id="293" parent="11" name="user_roles"/>
-    <table id="294" parent="11" name="users"/>
+    <table id="293" parent="11" name="users"/>
+    <table id="294" parent="11" name="users_roles"/>
     <column id="295" parent="292" name="id">
       <Position>1</Position>
-      <DataType>int|0s</DataType>
+      <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="296" parent="292" name="name">
+    <column id="296" parent="292" name="role">
       <Position>2</Position>
-      <DataType>varchar(100)|0s</DataType>
-      <NotNull>1</NotNull>
+      <DataType>varchar(255)|0s</DataType>
     </column>
     <key id="297" parent="292" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="298" parent="293" name="user_id">
+    <column id="298" parent="293" name="id">
       <Position>1</Position>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="299" parent="293" name="role_id">
-      <Position>2</Position>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <index id="300" parent="293" name="user_id">
-      <ColNames>user_id
-role_id</ColNames>
-      <Unique>1</Unique>
-      <Type>btree</Type>
-    </index>
-    <index id="301" parent="293" name="role_id">
-      <ColNames>role_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="302" parent="293" name="user_id">
-      <ColNames>user_id
-role_id</ColNames>
-      <UnderlyingIndexName>user_id</UnderlyingIndexName>
-    </key>
-    <foreign-key id="303" parent="293" name="user_roles_ibfk_1">
-      <ColNames>user_id</ColNames>
-      <RefTableName>users</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <foreign-key id="304" parent="293" name="user_roles_ibfk_2">
-      <ColNames>role_id</ColNames>
-      <RefTableName>roles</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <column id="305" parent="294" name="id">
-      <Position>1</Position>
-      <DataType>int|0s</DataType>
+      <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="306" parent="294" name="username">
+    <column id="299" parent="293" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
     </column>
-    <column id="307" parent="294" name="password">
+    <column id="300" parent="293" name="password">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
     </column>
-    <key id="308" parent="294" name="PRIMARY">
+    <index id="301" parent="293" name="UK_3g1j96g94xpk3lpxl2qbl985x">
+      <ColNames>name</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="302" parent="293" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
+    <key id="303" parent="293" name="UK_3g1j96g94xpk3lpxl2qbl985x">
+      <ColNames>name</ColNames>
+      <UnderlyingIndexName>UK_3g1j96g94xpk3lpxl2qbl985x</UnderlyingIndexName>
+    </key>
+    <column id="304" parent="294" name="User_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="305" parent="294" name="roles_id">
+      <Position>2</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="306" parent="294" name="FKe6k7h92pkxjim6t1176b7h95x">
+      <ColNames>User_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="307" parent="294" name="FKa62j07k5mhgifpp955h37ponj">
+      <ColNames>roles_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <foreign-key id="308" parent="294" name="FKe6k7h92pkxjim6t1176b7h95x">
+      <ColNames>User_id</ColNames>
+      <RefTableName>users</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="309" parent="294" name="FKa62j07k5mhgifpp955h37ponj">
+      <ColNames>roles_id</ColNames>
+      <RefTableName>roles</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
   </database-model>
 </dataSource>
