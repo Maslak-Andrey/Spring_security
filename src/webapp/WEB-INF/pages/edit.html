@@ -11,28 +11,23 @@
 <h1>Update user</h1>
 
 <form action="/admin/edit" method="POST">
-<!--    Может убрать потом-->
-    <input type="hidden" th:name="id" th:value="${user.getId()}">
-    <!--    Может убрать потом-->
-    <label for="name">Name</label>
-    <input type="text" th:name="name" id="name" th:value="${user.getName()}">
-    <br> <br>
-    <label for="password">Password</label>
-    <input type="text" th:name="password" id="password" th:value="${user.getPassword()}">
 
-    <input type="checkbox" th:name="roleUser" th:value="ROLE_USER" checked>User
-    <input type="checkbox" th:name="roleAdmin" th:value="ROLE_ADMIN">Admin
+    <input type="hidden" th:value="${user.getId()}" th:attr="name='Id'"/>
+    Name:<input type="text" th:value="${user.getName()}" th:attr="name='Name'">
     <br>
+    <br>
+    <input type="hidden" th:value="${user.getPassword()}" th:attr="name='password'"/>
+    New password:<input type="text" name="newPassword"> <Br>
+    <br>
+    <br>
+    Roles:
+    <br>
+    <input type="checkbox" name="roleAdmin" value="ROLE_ADMIN">Admin
+    <input type="checkbox" name="roleUser" value="ROLE_USER">User<Br>
+    <br>
+    <br>
+    <input type="submit" value="Update"> <Br>
 
-
-<!--    <br> <br>-->
-<!--    <input type="hidden" th:name="role1.id" th:value="${id1}">-->
-<!--    <input type="checkbox" th:name="role1" th:value="ROLE_USER" th:checked="${user.roles.size()>0}"> User-->
-<!--    <br> <br>-->
-<!--    <input type="hidden" th:name="role2.id" th:value="${id2}" th:disabled="${user.roles.size()<2}">-->
-<!--    <input type="checkbox" th:name="role2" th:value="ROLE_ADMIN" th:checked="${user.roles.size()>1}"> Admin-->
-<!--    <br> <br>-->
-    <input type="submit" value="Submit">
 </form>
 
 <br>

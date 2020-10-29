@@ -2,15 +2,12 @@ package web.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 // Для того, чтобы в дальнейшим использовать класс User в Spring Security, он должен реализовывать интерфейс UserDetails.
 // UserDetails можно представить, как адаптер между БД пользователей и тем что требуется Spring Security внутри SecurityContextHolder
@@ -31,9 +28,6 @@ public class User implements UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @Autowired
-//    @JoinTable(name = "users_roles",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "roles_id"))
     private Collection<Role> roles;
 
     public User() {

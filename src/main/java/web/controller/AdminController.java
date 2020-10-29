@@ -1,21 +1,15 @@
 package web.controller;
 
-import org.hibernate.HibernateException;
-import org.hibernate.exception.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import web.dao.RoleDao;
 import web.model.Role;
 import web.model.User;
 import web.service.RoleService;
 import web.service.UserService;
-import web.service.UserServiceImpl;
-
-import javax.persistence.PersistenceException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -66,19 +60,29 @@ public class AdminController {
     }
 
     @PostMapping("/admin/edit")
-    public String updateUser(@ModelAttribute("user") User user, @ModelAttribute("role1") Role role1,
-                             @ModelAttribute("role2") Role role2) {
+    public String updateUser(@ModelAttribute User user, @RequestParam(value = "newPassword", required = false) String newPassword, @RequestParam(name = "roleAdmin", required = false) String roleAdmin,
+                             @RequestParam(name = "roleUser", required = false) String roleUser,
+                             Model model) {
+        try {
+            if (!newPassword.isEmpty()) {
+                user.setPassword(newPassword);
+            }
 
-        Set<Role> rSet;
-        if(role2.getRole() != null){
-            rSet = Set.of(role1, role2);
-        } else {
-            rSet = Set.of(role1);
+            Set<Role> userRoles = new HashSet<>();
+            if (roleAdmin != null) {
+                userRoles.add(roleService.getRoleByName(roleAdmin));
+            }
+            if (roleUser != null) {
+                userRoles.add(roleService.getRoleByName(roleUser));
+
+            }
+            user.setRoles(userRoles);
+            userService.updateUser(user);
+
+            return "redirect:/index";
+        } catch (Throwable ex) {
+            return "error";
         }
-
-        user.setRoles(rSet);
-        userService.updateUser(user);
-        return "redirect:/admin";
     }
 
     @GetMapping("/admin/new")
