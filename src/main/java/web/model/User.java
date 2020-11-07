@@ -27,7 +27,6 @@ public class User implements UserDetails {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @Autowired
     private Collection<Role> roles;
 
     public User() {

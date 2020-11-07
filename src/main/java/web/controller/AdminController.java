@@ -30,7 +30,7 @@ public class AdminController {
     }
 
     @GetMapping("/admin")
-    public String admin(Model model) {
+    public String admin() {
         return "admin";
     }
 
